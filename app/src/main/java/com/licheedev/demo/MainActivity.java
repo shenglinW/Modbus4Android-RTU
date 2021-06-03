@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -25,7 +26,6 @@ import com.licheedev.modbus4android.ModbusObserver;
 import com.licheedev.modbus4android.ModbusParam;
 import com.licheedev.modbus4android.param.SerialParam;
 import com.licheedev.modbus4android.param.TcpParam;
-import com.licheedev.myutils.LogPlus;
 import com.serotonin.modbus4j.ModbusMaster;
 import com.serotonin.modbus4j.msg.ReadCoilsResponse;
 import com.serotonin.modbus4j.msg.ReadDiscreteInputsResponse;
@@ -47,6 +47,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class MainActivity extends BaseActivity {
+
+    private static final String TAG  = MainActivity.class.getSimpleName();
 
     @BindView(R.id.spinner_devices)
     NiceSpinner mSpinnerDevices;
@@ -284,7 +286,7 @@ public class MainActivity extends BaseActivity {
             //mStopBits = savedInstanceState.getInt("stopBits", 1);
         }
 
-        LogPlus.e("mode=" + mMode);
+        Log.d(TAG, "resolveIntent: mode=" + mMode);
 
         mAreaSerial.setVisibility(mMode == MODE_SERIAL ? View.VISIBLE : View.GONE);
         mAreaTcp.setVisibility(mMode == MODE_TCP ? View.VISIBLE : View.GONE);
